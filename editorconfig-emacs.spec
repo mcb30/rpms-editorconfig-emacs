@@ -9,7 +9,7 @@ Source1:	editorconfig-init.el
 BuildRequires:	emacs
 BuildRequires:	texinfo
 BuildArch:	noarch
-Requires:	emacs-filesystem
+Requires:	emacs(bin) >= %{_emacs_version}
 
 %description
 This is the EditorConfig plugin for emacs.  With this plugin
