@@ -4,11 +4,12 @@ Release:	1%{?dist}
 Summary:	EditorConfig plugin for emacs
 License:	GPL-3.0-or-later
 URL:		https://github.com/editorconfig/%{name}
-Source0:	https://github.com/editorconfig/%{name}/archive/refs/tags/v%{version}.tar.gz
+Source0:	https://github.com/editorconfig/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:	editorconfig-init.el
 BuildRequires:	emacs
 BuildRequires:	texinfo
 BuildArch:	noarch
+Requires:	emacs-filesystem
 
 %description
 This is the EditorConfig plugin for emacs.  With this plugin
@@ -16,7 +17,7 @@ installed, emacs will automatically respect coding style settings
 found in an .editorconfig file.
 
 %prep
-%setup -q -n %{name}-%{version}
+%autosetup
 
 %build
 
@@ -31,12 +32,12 @@ found in an .editorconfig file.
 make doc/editorconfig.info
 
 %install
-mkdir -p %{buildroot}%{_emacs_sitelispdir}
-install -p -m 644 *.el *.elc %{buildroot}%{_emacs_sitelispdir}/
-mkdir -p %{buildroot}%{_emacs_sitestartdir}
-install -p -m 644 %{SOURCE1} %{buildroot}%{_emacs_sitestartdir}/
-mkdir -p %{buildroot}%{_infodir}
-install -p -m 644 doc/editorconfig.info %{buildroot}%{_infodir}/
+%{__mkdir_p} %{buildroot}%{_emacs_sitelispdir}
+%{__install} -p -m 644 *.el *.elc %{buildroot}%{_emacs_sitelispdir}/
+%{__mkdir_p} %{buildroot}%{_emacs_sitestartdir}
+%{__install} -p -m 644 %{SOURCE1} %{buildroot}%{_emacs_sitestartdir}/
+%{__mkdir_p} %{buildroot}%{_infodir}
+%{__install} -p -m 644 doc/editorconfig.info %{buildroot}%{_infodir}/
 
 %files
 %doc CONTRIBUTORS CHANGELOG.md README.md
